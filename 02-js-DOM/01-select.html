@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title></title>
+  <link rel="stylesheet" href="">
+</head>
+
+<body>
+
+
+  <div id="content">
+      <div><a href="https://kea.dk/">KEA</a></div>
+      <div><a href="https://github.com/vict890f/tema7">GIT</a></div>
+      <div><img src="https://astrologi.dk/wp-content/uploads/2017/04/fr%C3%B8.jpg"></div>
+
+  </div>
+<script>
+
+ let content = document.querySelector("#content");
+ let div = document.querySelector("#content div a");
+ let div2 = document.querySelector("#content div:nth-child(2) a");
+ let div3 = document.querySelector("#content div + div + div");
+ let link1 = document.querySelector("#content div a");
+ let link2 = document.querySelector("#content div + div a");
+ let billede = document.querySelector("#content img");
+
+    div.textContent = "måske et nyt link?";
+    content.innerHTML += "<h1>ekstra</h1>";
+
+    console.log(content);
+    console.log(div);
+    console.log(div2);
+    console.log(div3);
+    console.log(link1);
+    console.log(link2);
+    console.log(billede);
+
+    </script>
+</body>
+</html>
