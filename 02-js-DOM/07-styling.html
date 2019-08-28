@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="stylesheet" href="">
+
+    <style>
+        #firkant {
+            width: 20vw;
+            height: 20vw;
+            background-color: green;
+        }
+
+        #cirkel {
+            width: 20vw;
+            height: 20vw;
+            background-color: red;
+            border-radius: 10vw;
+        }
+
+        body {
+            line-height: 125px;
+            text-align: center;
+        }
+
+        img {
+            padding-top: 5vw;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div id="firkant"></div>
+    <br>
+    <div id="cirkel"></div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", start);
+
+        function start() {
+            console.log("start");
+
+            let firkant = document.querySelector("#firkant");
+            let cirkel = document.querySelector("#cirkel");
+
+
+            firkant.innerHTML += '<img src="http://mabe-kea.dk/E19/pics/frog.png">';
+            cirkel.innerHTML += '<img src="http://mabe-kea.dk/E19/pics/pig.png">';
+
+
+            console.log(firkant);
+            console.log(cirkel);
+
+            firkant.addEventListener("click", flyt);
+            cirkel.addEventListener("click", stop);
+
+        }
+
+        function flyt() {
+            console.log("bytfirkant");
+            let firkantStart = firkant.innerHTML;
+            firkant.innerHTML = cirkel.innerHTML;
+            cirkel.innerHTML = firkantStart;
+            firkant.style.backgroundColor = "yellow";
+            cirkel.style.backgroundColor = "blue";
+
+        }
+
+        function stop() {
+            console.log("bytfirkant");
+            firkant.removeEventListener("click", flyt);
+
+
+        }
+
+    </script>
+</body>
+
+</html>
