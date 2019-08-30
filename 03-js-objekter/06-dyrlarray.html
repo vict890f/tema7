@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="stylesheet" href="">
+</head>
+
+<body>
+
+    <template>
+        <section>
+            <h1></h1>
+            <h2></h2>
+            <img src="" alt="">
+            <p></p>
+            <div></div>
+        </section>
+    </template>
+
+    <section class="modtager"></section>
+
+
+    <script>
+        document.addEventListener("DOMContentLoaded", visDyr);
+
+        let dyr = [
+
+            {
+                "navn": "frø",
+                "type": "amfibie",
+                "billede": "http://mabe-kea.dk/E19/pics/frog.png",
+                "levested": "fra vandhullet"
+            }, {
+                "navn": "gris",
+                "type": "pattdedyr",
+                "billede": "http://mabe-kea.dk/E19/pics/pig.png",
+                "levested": "fra grisefarmen"
+            }, {
+                "navn": "ræv",
+                "type": "pattdedyr",
+                "billede": "http://mabe-kea.dk/E19/pics/fox.png",
+                "levested": "fra skoven"
+            }, {
+                "navn": "sild",
+                "type": "fisk",
+                "billede": "http://mabe-kea.dk/E19/pics/sild.jpg",
+                "levested": "fra havet"
+            }, {
+                "navn": "krokodille",
+                "type": "krybdyr",
+                "billede": "http://mabe-kea.dk/E19/pics/kroko.jpg",
+                "levested": "fra floden"
+            }
+
+        ];
+
+
+        function visDyr() {
+            const modtagerKloner = document.querySelector(".modtager");
+            const temp = document.querySelector("template");
+
+
+            dyr.forEach(dyr => {
+                let klon = temp.cloneNode(true).content;
+                klon.querySelector("h1").textContent = dyr.navn;
+                klon.querySelector("h2").textContent = dyr.type;
+                klon.querySelector("img").src = dyr.billede;
+                klon.querySelector("p").textContent = dyr.levested;
+                modtagerKloner.appendChild(klon);
+            })
+
+
+        }
+    </script>
+</body></html>
