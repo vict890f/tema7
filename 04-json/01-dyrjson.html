@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="stylesheet" href="">
+</head>
+
+<body>
+
+    <template>
+        <section>
+            <h1></h1>
+            <h2></h2>
+            <img src="" alt="">
+            <p></p>
+            <div></div>
+        </section>
+    </template>
+
+    <section class="modtager"></section>
+
+
+    <script>
+        let dyrArray;
+
+        document.addEventListener("DOMContentLoaded", hentJson);
+
+        async function hentJson() {
+
+            // Starter aynkron funktion
+
+            console.log("hentJson");
+
+            const myJson = await fetch("dyr.json");
+
+            //Henter json fil
+
+            dyrArray = await myJson.json();
+
+            //Formatere Json fil til data som der kan forståes
+
+            visDyr();
+        }
+
+
+
+
+        function visDyr() {
+            const dest = document.querySelector(".modtager");
+            const temp = document.querySelector("template");
+
+
+            dyrArray.forEach(dyr => {
+                let klon = temp.cloneNode(true).content;
+                klon.querySelector("h1").textContent = dyr.navn;
+                klon.querySelector("h2").textContent = dyr.type;
+                klon.querySelector("img").src = dyr.billede;
+                klon.querySelector("p").textContent = dyr.levested;
+                dest.appendChild(klon);
+            })
+
+
+        }
+
+    </script>
+</body>
+
+</html>
