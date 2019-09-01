@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="stylesheet" href="">
+
+    <style>
+        img {
+            width: 100%;
+        }
+
+        #modtager {
+            display: grid;
+            grid-template-columns: 1fr;
+            grid-gap: 5vw;
+
+        }
+
+        article {
+            border: 3px dotted black;
+
+        }
+
+        @media only screen and (min-width: 600px) {
+            #modtager {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media only screen and (min-width: 1200px) {
+            #modtager {
+                grid-template-columns: 1fr 1fr 1fr;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+    <template>
+        <article>
+            <h2></h2>
+            <h3></h3>
+            <p class="pris"></p>
+            <p class="kort"></p>
+            <p class="lang"></p>
+            <p class="oprindelse"></p>
+            <img src="" alt="">
+            <a href=""></a>
+            <div></div>
+        </article>
+
+
+    </template>
+
+
+    <section id="modtager"></section>
+
+
+
+
+    <script>
+        let menuArray;
+
+        document.addEventListener("DOMContentLoaded", hentJson);
+
+        async function hentJson() {
+
+            // Starter aynkron funktion
+
+            console.log("hentJson");
+
+            let jsonData = await fetch("https://spreadsheets.google.com/feeds/list/13PP4I1c-jGebrF8YWJqDQXVzQJMj5n_fVDaFYOhOZGM/od6/public/values?alt=json");
+
+
+            //Henter json fil
+
+            menuArray = await jsonData.json();
+
+            //Formatere Json fil til data som der kan forståes
+
+            visMenu();
+        }
+
+
+
+
+        function visMenu() {
+
+            const dest = document.querySelector("#modtager");
+            const temp = document.querySelector("template");
+
+
+            menuArray.feed.entry.forEach(ret => {
+
+                let klon = temp.cloneNode(true).content;
+                klon.querySelector("h2").textContent = ret.gsx$kategori.$t;
+                klon.querySelector("h3").textContent = ret.gsx$navn.$t;
+                klon.querySelector(".pris").textContent = ret.gsx$pris.$t;
+                klon.querySelector(".kort").textContent = ret.gsx$kort.$t;
+                klon.querySelector(".lang").textContent = ret.gsx$lang.$t;
+                klon.querySelector(".oprindelse").textContent = ret.gsx$oprindelse.$t;
+
+                klon.querySelector("img").src = `imgs/small/${ret.gsx$billede.$t}-sm.jpg`;
+
+
+
+
+
+
+                //                klon.querySelector("a").textContent = `www.github.com/${ret.gsx$github.$t}`;
+                //                                klon.querySelector("a").href = `https://www.github.com/${ret.gsx$github.$t}`;
+
+                dest.appendChild(klon);
+            })
+
+
+        }
+    </script>
+</body></html>
