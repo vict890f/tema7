@@ -20,7 +20,8 @@
         }
 
         article {
-            border: 3px dotted black;
+            border: 3px dotted orange;
+            padding: 1vw;
 
         }
 
@@ -103,13 +104,10 @@
                 klon.querySelector(".kort").textContent = ret.gsx$kort.$t;
                 klon.querySelector(".lang").textContent = ret.gsx$lang.$t;
                 klon.querySelector(".oprindelse").textContent = ret.gsx$oprindelse.$t;
-
                 klon.querySelector("img").src = `imgs/small/${ret.gsx$billede.$t}-sm.jpg`;
 
 
-
-
-
+                //                De to kloner nede under skal laves til links, der kan vise retterne som en single side
 
                 //                klon.querySelector("a").textContent = `www.github.com/${ret.gsx$github.$t}`;
                 //                                klon.querySelector("a").href = `https://www.github.com/${ret.gsx$github.$t}`;
