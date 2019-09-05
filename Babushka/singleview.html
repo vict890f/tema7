@@ -19,16 +19,32 @@
             width: 100%;
         }
 
+        #top {
+            background-color: darkorange;
+            position: absolute;
+            top: 0;
+            width: 100vw;
+            height: 10vw;
+        }
+
+        #top h1 {
+            color: white;
+            font-family: 'Roboto', sans-serif;
+            font-size: 5rem;
+            margin: 1.5vw 0 1vw 1vw;
+        }
+
         .indhold {
             width: 70vw;
             height: 70vw;
             background: #fff;
-            margin: 4rem auto;
+            margin: 0vw auto;
             padding: 10px;
 
         }
 
         .luk {
+            margin: 11vw 0 0 0;
             font-size: 2rem;
             cursor: pointer;
         }
@@ -36,11 +52,19 @@
 
         #modtager {
             width: 70vw;
-            margin: auto;
+            margin: 0;
             display: grid;
             grid-template-columns: 1fr 1fr 1fr;
             grid-gap: 10px;
 
+        }
+
+        #modtager h2 {
+            font-size: 1rem;
+        }
+
+        #modtager h3 {
+            font-size: 1.5rem;
         }
 
         @media only screen and (min-width: 600px) {
@@ -58,6 +82,13 @@
 </head>
 
 <body>
+
+
+    <section id="top">
+        <h1>Babushka</h1>
+    </section>
+
+
 
 
     <div id="single">
