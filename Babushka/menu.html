@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+    <button class="filter" data-kategori="forretter">Forretter</button>
+    <button class="filter" data-kategori="hovedretter">Hovedretter</button>
+    <button class="filter" data-kategori="desserter">Desserter</button>
+    <button class="filter" data-kategori="drikkevarer">Drikkevarer</button>
+
+
+
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="stylesheet" href="">
+
+    <style>
+        body {
+            box-sizing: border-box;
+            margin: 0;
+        }
+
+        img {
+            width: 100%;
+        }
+
+        #splash {
+            width: 100vw;
+            height: 60vw;
+            background-color: orange;
+        }
+
+        #splash h1 {
+            color: white;
+            font-size: 10rem;
+            font-family: sans-serif;
+            text-transform: capitalize;
+            margin: 0;
+        }
+
+        #modtager {
+            display: grid;
+            grid-template-columns: 1fr;
+            grid-gap: 5vw;
+            padding: 0 0 0 1vw;
+
+        }
+
+        /*
+
+        article:hover {
+            background-color: orange;
+        }
+
+
+        article:nth-child(3n+1) {
+            background-color: white;
+        }
+*/
+
+        @media only screen and (min-width: 600px) {
+            #modtager {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media only screen and (min-width: 1200px) {
+            #modtager {
+                grid-template-columns: 1fr 1fr 1fr;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <section id="splash">
+        <h1>Babushka</h1>
+    </section>
+
+    <button></button>
+
+    <template>
+        <article>
+            <h2></h2>
+            <h3></h3>
+            <p class="pris"></p>
+            <p class="kort"></p>
+            <p class="lang"></p>
+            <p class="oprindelse"></p>
+            <img src="" alt="">
+            <a href=""></a>
+            <div></div>
+        </article>
+
+
+    </template>
+
+
+    <section id="modtager"></section>
+
+
+
+
+    <script>
+        document.addEventListener("DOMContentLoaded", hentJson);
+
+        let menuArray;
+
+        const dest = document.querySelector("#modtager");
+        const temp = document.querySelector("template");
+        let filter = "forretter";
+        //        let filter = "hovedretter";
+        //        let filter = "drikkevarer";
+        //        let filter = "desserter";
+
+
+
+        async function hentJson() {
+
+            // Starter aynkron funktion
+
+            console.log("hentJson");
+
+            let jsonData = await fetch("https://spreadsheets.google.com/feeds/list/13PP4I1c-jGebrF8YWJqDQXVzQJMj5n_fVDaFYOhOZGM/od6/public/values?alt=json");
+
+            //Henter json fil
+
+            menuArray = await jsonData.json();
+
+            //Formatere Json fil til data som der kan forståes
+
+
+            menuArray.feed.entry.forEach(ret => {
+                if (ret.gsx$kategori.$t == filter) {
+                    let klon = temp.cloneNode(true).content;
+                    klon.querySelector("h2").textContent = ret.gsx$kategori.$t;
+                    klon.querySelector("h3").textContent = ret.gsx$navn.$t;
+                    klon.querySelector(".pris").textContent = ret.gsx$pris.$t;
+                    klon.querySelector(".kort").textContent = ret.gsx$kort.$t;
+                    klon.querySelector(".lang").textContent = ret.gsx$lang.$t;
+                    klon.querySelector(".oprindelse").textContent = ret.gsx$oprindelse.$t;
+                    klon.querySelector("img").src = `imgs/small/${ret.gsx$billede.$t}-sm.jpg`;
+
+
+                    //                De to kloner nede under skal laves til links, der kan vise retterne som en single side
+
+                    //                klon.querySelector("a").textContent = `www.github.com/${ret.gsx$github.$t}`;
+                    //                                klon.querySelector("a").href = `https://www.github.com/${ret.gsx$github.$t}`;
+
+                    dest.appendChild(klon);
+
+                }
+            })
+
+
+        }
+    </script>
+</body></html>
